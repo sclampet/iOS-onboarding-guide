@@ -29,4 +29,14 @@ class HomeViewControllerTests: XCTestCase {
             XCTAssertTrue(layout.scrollDirection == .horizontal)
         }
     }
+    
+    func testPageCellsRenderWithCorrectImageName() {
+        let pages: [Page] = [Page(imageName: "page1", title: "Choose your adventure", bodyText: "We're here to help you make the most of the adventures that matter to you.")]
+        let cell = PageCell()
+        
+        cell.page = pages[0]
+        
+        XCTAssertTrue(cell.imageView.image == UIImage(named: pages[0].imageName))
+        
+    }
 }
