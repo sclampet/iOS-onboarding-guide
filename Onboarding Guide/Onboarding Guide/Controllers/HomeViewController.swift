@@ -53,6 +53,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        automaticallyAdjustsScrollViewInsets = false
         navigationController?.navigationBar.isHidden = true
         setupScrolling()
         view.addSubview(collectionView)
