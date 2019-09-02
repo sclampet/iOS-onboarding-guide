@@ -17,21 +17,23 @@ class HomeViewController: UICollectionViewController {
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.backgroundColor = .cyan
     }
+}
 
-    // MARK: UICollectionViewDataSource
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
+    // MARK: DataSource
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 0
     }
-
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 0
     }
-
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-    
+        
         return cell
     }
-
+    
+    // MARK: DataSource
+    
 }
