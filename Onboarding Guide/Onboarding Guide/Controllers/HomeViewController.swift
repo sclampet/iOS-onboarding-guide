@@ -17,34 +17,59 @@ private let pages: [Page] = {
     ]
 }()
 
-class HomeViewController: UICollectionViewController {
-
+class HomeViewController: UIViewController {
+    
+    lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.delegate = self
+        cv.dataSource = self
+        cv.backgroundColor = .white
+        return cv
+    }()
+    
+    let pageControl: UIPageControl = {
+        let pc = UIPageControl()
+        pc.pageIndicatorTintColor = .lightGray
+        pc.currentPageIndicatorTintColor = .cyan
+        pc.numberOfPages = 3
+        return pc
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView?.register(PageCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true
         setupScrolling()
+        view.addSubview(collectionView)
+        view.addSubview(pageControl)
+        
+        view.addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
+        
+        view.addConstraintsWithFormat(format: "V:[v0(100)]|", views: pageControl)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: pageControl)
+        
+        collectionView.register(PageCell.self, forCellWithReuseIdentifier: cellId)
     }
     
     func setupScrolling() {
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
             collectionView.isPagingEnabled = true
         }
     }
 }
 
-extension HomeViewController: UICollectionViewDelegateFlowLayout {
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     // MARK: DataSource
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return pages.count
     }
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PageCell
         let page = pages[indexPath.item]
         cell.page = page
