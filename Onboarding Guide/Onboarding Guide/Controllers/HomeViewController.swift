@@ -57,32 +57,10 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         automaticallyAdjustsScrollViewInsets = false
         navigationController?.navigationBar.isHidden = true
-        setupScrolling()
-        view.addSubview(collectionView)
-        view.addSubview(pageControl)
-        view.addSubview(skipButton)
-        view.addSubview(nextButton)
-        
-        view.addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)
-        view.addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
-        
-        view.addConstraintsWithFormat(format: "V:[v0(100)]|", views: pageControl)
-        view.addConstraintsWithFormat(format: "H:|[v0]|", views: pageControl)
-        
-        view.addConstraintsWithFormat(format: "V:|-16-[v0(100)]", views: skipButton)
-        view.addConstraintsWithFormat(format: "H:|-30-[v0]", views: skipButton)
-        
-        view.addConstraintsWithFormat(format: "V:|-16-[v0(100)]", views: nextButton)
-        view.addConstraintsWithFormat(format: "H:[v0]-30-|", views: nextButton)
-        
         collectionView.register(PageCell.self, forCellWithReuseIdentifier: cellId)
-    }
-    
-    func setupScrolling() {
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-            collectionView.isPagingEnabled = true
-        }
+        
+        setupScrolling()
+        setupViews()
     }
 }
 
@@ -113,8 +91,38 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 
 extension HomeViewController {
+    //MARK: Scroll Methods
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let pageNumber = Int(targetContentOffset.pointee.x / view.frame.width)
         pageControl.currentPage = pageNumber
+    }
+}
+
+extension HomeViewController {
+    //MARK: Helper Methods
+    func setupScrolling() {
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+            collectionView.isPagingEnabled = true
+        }
+    }
+    
+    func setupViews() {
+        view.addSubview(collectionView)
+        view.addSubview(pageControl)
+        view.addSubview(skipButton)
+        view.addSubview(nextButton)
+        
+        view.addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
+        
+        view.addConstraintsWithFormat(format: "V:[v0(100)]|", views: pageControl)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: pageControl)
+        
+        view.addConstraintsWithFormat(format: "V:|-16-[v0(100)]", views: skipButton)
+        view.addConstraintsWithFormat(format: "H:|-30-[v0]", views: skipButton)
+        
+        view.addConstraintsWithFormat(format: "V:|-16-[v0(100)]", views: nextButton)
+        view.addConstraintsWithFormat(format: "H:[v0]-30-|", views: nextButton)
     }
 }
