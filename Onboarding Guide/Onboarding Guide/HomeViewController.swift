@@ -9,6 +9,11 @@
 import UIKit
 
 private let cellId = "cellId"
+private let pages: [Page] = {
+    return [
+        Page(imageName: "mountains", title: "Your adventure awaits!", bodyText: "We're here to help you make the most of the adventures that matter to you.")
+    ]
+}()
 
 class HomeViewController: UICollectionViewController {
 
@@ -34,7 +39,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return pages.count
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
