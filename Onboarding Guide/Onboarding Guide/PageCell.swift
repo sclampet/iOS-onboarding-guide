@@ -14,8 +14,18 @@ class PageCell: UICollectionViewCell {
         setupViews()
     }
     
+    let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleToFill
+        imageView.clipsToBounds = true
+        imageView.image = UIImage(named: "mountains")
+        return imageView
+    }()
+    
     func setupViews() {
-        backgroundColor = .yellow
+        addSubview(imageView)
+        addConstraintsWithFormat(format: "V:|[v0]|", views: imageView)
+        addConstraintsWithFormat(format: "H:|[v0]|", views: imageView)
     }
     
     required init?(coder aDecoder: NSCoder) {
