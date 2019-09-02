@@ -109,3 +109,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return 0
     }
 }
+
+extension HomeViewController {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let pageNumber = Int(targetContentOffset.pointee.x / view.frame.width)
+        pageControl.currentPage = pageNumber
+    }
+}
