@@ -16,6 +16,7 @@ class PageCell: UICollectionViewCell {
                 return
             }
             imageView.image = UIImage(named: page.imageName)
+            textView.text = page.title
         }
     }
     
@@ -32,10 +33,23 @@ class PageCell: UICollectionViewCell {
         return imageView
     }()
     
+    let textView: UITextView = {
+        let tv = UITextView()
+        tv.text = ""
+        tv.isEditable = false
+        return tv
+    }()
+    
     func setupViews() {
         addSubview(imageView)
-        addConstraintsWithFormat(format: "V:|[v0]|", views: imageView)
+        addSubview(textView)
+        
+        addConstraintsWithFormat(format: "V:|[v0]", views: imageView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: imageView)
+        imageView.bottomAnchor.constraint(equalTo: textView.topAnchor).isActive = true
+        
+        addConstraintsWithFormat(format: "V:[v0(250)]|", views: textView)
+        addConstraintsWithFormat(format: "H:|[v0]|", views: textView)
     }
     
     required init?(coder aDecoder: NSCoder) {
