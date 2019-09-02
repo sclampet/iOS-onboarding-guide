@@ -40,6 +40,7 @@ class HomeViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Skip", for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         return button
     }()
     
@@ -47,6 +48,7 @@ class HomeViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Next", for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         return button
     }()
     
