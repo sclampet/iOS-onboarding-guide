@@ -14,7 +14,7 @@ class HomeViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        self.collectionView!.register(PageCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.backgroundColor = .cyan
         setupScrolling()
     }
@@ -38,7 +38,6 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-        cell.backgroundColor = .white
         return cell
     }
     

@@ -11,6 +11,11 @@ import UIKit
 class PageCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupViews()
+    }
+    
+    func setupViews() {
+        backgroundColor = .yellow
     }
     
     required init?(coder aDecoder: NSCoder) {

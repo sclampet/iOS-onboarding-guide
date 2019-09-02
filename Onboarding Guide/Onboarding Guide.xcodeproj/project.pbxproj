@@ -104,8 +104,8 @@
 				60B3E825231D8C2300C1F970 /* LaunchScreen.storyboard */,
 				60B3E828231D8C2300C1F970 /* Info.plist */,
 				60B3E84F231D8F1700C1F970 /* HomeViewController.swift */,
-				60B3E84C231D8EB100C1F970 /* Extensions */,
 				60B3E851231D93FB00C1F970 /* PageCell.swift */,
+				60B3E84C231D8EB100C1F970 /* Extensions */,
 			);
 			path = "Onboarding Guide";
 			sourceTree = "<group>";
