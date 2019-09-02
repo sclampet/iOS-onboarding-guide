@@ -39,4 +39,8 @@ class HomeViewControllerTests: XCTestCase {
         XCTAssertTrue(cell.imageView.image == UIImage(named: pages[0].imageName))
         
     }
+    
+    func testCollectionViewIsPagingEnabled() {
+        XCTAssertTrue(homeController.collectionView.isPagingEnabled)
+    }
 }
