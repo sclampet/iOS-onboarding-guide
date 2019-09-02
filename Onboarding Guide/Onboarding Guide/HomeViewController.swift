@@ -22,6 +22,7 @@ class HomeViewController: UICollectionViewController {
     func setupScrolling() {
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
+            collectionView.isPagingEnabled = true
         }
     }
 }
@@ -44,5 +45,9 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     // MARK: DataSource
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: view.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
 }
