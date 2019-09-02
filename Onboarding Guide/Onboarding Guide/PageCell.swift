@@ -9,6 +9,16 @@
 import UIKit
 
 class PageCell: UICollectionViewCell {
+    
+    var page: Page? {
+        didSet {
+            guard let page = page else {
+                return
+            }
+            imageView.image = UIImage(named: page.imageName)
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -16,7 +26,7 @@ class PageCell: UICollectionViewCell {
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.image = UIImage(named: "mountains")
         return imageView
