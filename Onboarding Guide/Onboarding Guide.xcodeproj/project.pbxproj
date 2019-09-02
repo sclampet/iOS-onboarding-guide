@@ -10,7 +10,7 @@
 		60B3E81D231D8C2200C1F970 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B3E81C231D8C2200C1F970 /* AppDelegate.swift */; };
 		60B3E824231D8C2300C1F970 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60B3E823231D8C2300C1F970 /* Assets.xcassets */; };
 		60B3E827231D8C2300C1F970 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60B3E825231D8C2300C1F970 /* LaunchScreen.storyboard */; };
-		60B3E832231D8C2300C1F970 /* Onboarding_GuideTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B3E831231D8C2300C1F970 /* Onboarding_GuideTests.swift */; };
+		60B3E832231D8C2300C1F970 /* HomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B3E831231D8C2300C1F970 /* HomeViewControllerTests.swift */; };
 		60B3E83D231D8C2300C1F970 /* Onboarding_GuideUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B3E83C231D8C2300C1F970 /* Onboarding_GuideUITests.swift */; };
 		60B3E84E231D8EBA00C1F970 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B3E84D231D8EBA00C1F970 /* Helpers.swift */; };
 		60B3E850231D8F1700C1F970 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B3E84F231D8F1700C1F970 /* HomeViewController.swift */; };
@@ -42,7 +42,7 @@
 		60B3E826231D8C2300C1F970 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		60B3E828231D8C2300C1F970 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60B3E82D231D8C2300C1F970 /* Onboarding GuideTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Onboarding GuideTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		60B3E831231D8C2300C1F970 /* Onboarding_GuideTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding_GuideTests.swift; sourceTree = "<group>"; };
+		60B3E831231D8C2300C1F970 /* HomeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTests.swift; sourceTree = "<group>"; };
 		60B3E833231D8C2300C1F970 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60B3E838231D8C2300C1F970 /* Onboarding GuideUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Onboarding GuideUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60B3E83C231D8C2300C1F970 /* Onboarding_GuideUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding_GuideUITests.swift; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 		60B3E830231D8C2300C1F970 /* Onboarding GuideTests */ = {
 			isa = PBXGroup;
 			children = (
-				60B3E831231D8C2300C1F970 /* Onboarding_GuideTests.swift */,
+				60B3E831231D8C2300C1F970 /* HomeViewControllerTests.swift */,
 				60B3E833231D8C2300C1F970 /* Info.plist */,
 			);
 			path = "Onboarding GuideTests";
@@ -281,7 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60B3E832231D8C2300C1F970 /* Onboarding_GuideTests.swift in Sources */,
+				60B3E832231D8C2300C1F970 /* HomeViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

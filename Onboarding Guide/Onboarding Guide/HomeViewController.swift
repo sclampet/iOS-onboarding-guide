@@ -24,7 +24,6 @@ class HomeViewController: UICollectionViewController {
         collectionView?.register(PageCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true
-        
         setupScrolling()
     }
     
