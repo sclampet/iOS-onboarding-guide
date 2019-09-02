@@ -11,9 +11,9 @@ import UIKit
 private let cellId = "cellId"
 private let pages: [Page] = {
     return [
-        Page(imageName: "page1", title: "Your adventure awaits!", bodyText: "We're here to help you make the most of the adventures that matter to you."),
-        Page(imageName: "page2", title: "Your adventure awaits!", bodyText: "We're here to help you make the most of the adventures that matter to you."),
-        Page(imageName: "page3", title: "Your adventure awaits!", bodyText: "We're here to help you make the most of the adventures that matter to you.")
+        Page(imageName: "page1", title: "Choose your adventure", bodyText: "We're here to help you make the most of the adventures that matter to you."),
+        Page(imageName: "page2", title: "Document your experience", bodyText: "We'll help make sure you never forget this."),
+        Page(imageName: "page3", title: "Bask in the glow", bodyText: "Relax and reminisce about what a great decision you've made.")
     ]
 }()
 
@@ -52,7 +52,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         return cell
     }
     
-    // MARK: DataSource
+    // MARK: Delagate
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: view.frame.height)
     }
