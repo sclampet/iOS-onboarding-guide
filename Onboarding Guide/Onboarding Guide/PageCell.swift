@@ -16,7 +16,19 @@ class PageCell: UICollectionViewCell {
                 return
             }
             imageView.image = UIImage(named: page.imageName)
-            textView.text = page.title
+            
+            let color = UIColor(white: 0.2, alpha: 1)
+            let attributedText = NSMutableAttributedString(string: page.title, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .medium), NSAttributedString.Key.foregroundColor: color])
+            
+            attributedText.append(NSAttributedString(string: "\n\n\(page.bodyText)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: color]))
+            
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .center
+            
+            let length = attributedText.string.count
+            attributedText.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: length))
+            
+            textView.attributedText = attributedText
         }
     }
     
@@ -37,6 +49,7 @@ class PageCell: UICollectionViewCell {
         let tv = UITextView()
         tv.text = ""
         tv.isEditable = false
+        tv.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
         return tv
     }()
     
@@ -49,7 +62,7 @@ class PageCell: UICollectionViewCell {
         imageView.bottomAnchor.constraint(equalTo: textView.topAnchor).isActive = true
         
         addConstraintsWithFormat(format: "V:[v0(250)]|", views: textView)
-        addConstraintsWithFormat(format: "H:|[v0]|", views: textView)
+        addConstraintsWithFormat(format: "H:|-20-[v0]-20-|", views: textView)
     }
     
     required init?(coder aDecoder: NSCoder) {
