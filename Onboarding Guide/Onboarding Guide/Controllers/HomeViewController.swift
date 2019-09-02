@@ -36,18 +36,41 @@ class HomeViewController: UIViewController {
         return pc
     }()
     
+    let skipButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Skip", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        return button
+    }()
+    
+    let nextButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Next", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        return button
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         setupScrolling()
         view.addSubview(collectionView)
         view.addSubview(pageControl)
+        view.addSubview(skipButton)
+        view.addSubview(nextButton)
         
         view.addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
         
         view.addConstraintsWithFormat(format: "V:[v0(100)]|", views: pageControl)
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: pageControl)
+        
+        view.addConstraintsWithFormat(format: "V:|-16-[v0(100)]", views: skipButton)
+        view.addConstraintsWithFormat(format: "H:|-30-[v0]", views: skipButton)
+        
+        view.addConstraintsWithFormat(format: "V:|-16-[v0(100)]", views: nextButton)
+        view.addConstraintsWithFormat(format: "H:[v0]-30-|", views: nextButton)
         
         collectionView.register(PageCell.self, forCellWithReuseIdentifier: cellId)
     }
