@@ -11,7 +11,9 @@ import UIKit
 private let cellId = "cellId"
 private let pages: [Page] = {
     return [
-        Page(imageName: "mountains", title: "Your adventure awaits!", bodyText: "We're here to help you make the most of the adventures that matter to you.")
+        Page(imageName: "page1", title: "Your adventure awaits!", bodyText: "We're here to help you make the most of the adventures that matter to you."),
+        Page(imageName: "page2", title: "Your adventure awaits!", bodyText: "We're here to help you make the most of the adventures that matter to you."),
+        Page(imageName: "page3", title: "Your adventure awaits!", bodyText: "We're here to help you make the most of the adventures that matter to you.")
     ]
 }()
 
