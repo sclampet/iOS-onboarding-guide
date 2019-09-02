@@ -15,7 +15,7 @@ class HomeViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-
+        collectionView.backgroundColor = .cyan
     }
 
     // MARK: UICollectionViewDataSource
