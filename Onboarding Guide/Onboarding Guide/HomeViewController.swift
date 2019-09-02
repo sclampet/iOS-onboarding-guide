@@ -15,7 +15,7 @@ class HomeViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView!.register(PageCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.backgroundColor = .cyan
+        navigationController?.navigationBar.isHidden = true
         setupScrolling()
     }
     
