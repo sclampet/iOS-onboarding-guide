@@ -9,6 +9,7 @@
 import UIKit
 
 private let cellId = "cellId"
+private let loginCellId = "loginCellId"
 private let pages: [Page] = {
     return [
         Page(imageName: "page1", title: "Choose your adventure", bodyText: "We're here to help you make the most of the adventures that matter to you."),
@@ -32,7 +33,7 @@ class HomeViewController: UIViewController {
         let pc = UIPageControl()
         pc.pageIndicatorTintColor = .lightGray
         pc.currentPageIndicatorTintColor = .cyan
-        pc.numberOfPages = 3
+        pc.numberOfPages = pages.count + 1
         return pc
     }()
     
@@ -57,8 +58,8 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         automaticallyAdjustsScrollViewInsets = false
         navigationController?.navigationBar.isHidden = true
-        collectionView.register(PageCell.self, forCellWithReuseIdentifier: cellId)
         
+        registerCollectionViewCells()
         setupScrolling()
         setupViews()
     }
@@ -71,9 +72,14 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pages.count
+        return pages.count + 1
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.item == pages.count {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: loginCellId, for: indexPath)
+            return cell
+        }
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PageCell
         let page = pages[indexPath.item]
         cell.page = page
@@ -124,5 +130,10 @@ extension HomeViewController {
         
         view.addConstraintsWithFormat(format: "V:|-16-[v0(100)]", views: nextButton)
         view.addConstraintsWithFormat(format: "H:[v0]-30-|", views: nextButton)
+    }
+    
+    func registerCollectionViewCells() {
+        collectionView.register(PageCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(LoginViewCell.self, forCellWithReuseIdentifier: loginCellId)
     }
 }
