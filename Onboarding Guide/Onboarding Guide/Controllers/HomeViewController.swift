@@ -9,6 +9,7 @@
 import UIKit
 
 private let cellId = "cellId"
+private let loginCellId = "loginCellId"
 private let pages: [Page] = {
     return [
         Page(imageName: "page1", title: "Choose your adventure", bodyText: "We're here to help you make the most of the adventures that matter to you."),
@@ -32,7 +33,7 @@ class HomeViewController: UIViewController {
         let pc = UIPageControl()
         pc.pageIndicatorTintColor = .lightGray
         pc.currentPageIndicatorTintColor = .cyan
-        pc.numberOfPages = 3
+        pc.numberOfPages = pages.count + 1
         return pc
     }()
     
@@ -57,32 +58,10 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         automaticallyAdjustsScrollViewInsets = false
         navigationController?.navigationBar.isHidden = true
+        
+        registerCollectionViewCells()
         setupScrolling()
-        view.addSubview(collectionView)
-        view.addSubview(pageControl)
-        view.addSubview(skipButton)
-        view.addSubview(nextButton)
-        
-        view.addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)
-        view.addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
-        
-        view.addConstraintsWithFormat(format: "V:[v0(100)]|", views: pageControl)
-        view.addConstraintsWithFormat(format: "H:|[v0]|", views: pageControl)
-        
-        view.addConstraintsWithFormat(format: "V:|-16-[v0(100)]", views: skipButton)
-        view.addConstraintsWithFormat(format: "H:|-30-[v0]", views: skipButton)
-        
-        view.addConstraintsWithFormat(format: "V:|-16-[v0(100)]", views: nextButton)
-        view.addConstraintsWithFormat(format: "H:[v0]-30-|", views: nextButton)
-        
-        collectionView.register(PageCell.self, forCellWithReuseIdentifier: cellId)
-    }
-    
-    func setupScrolling() {
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-            collectionView.isPagingEnabled = true
-        }
+        setupViews()
     }
 }
 
@@ -93,9 +72,14 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pages.count
+        return pages.count + 1
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.item == pages.count {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: loginCellId, for: indexPath)
+            return cell
+        }
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PageCell
         let page = pages[indexPath.item]
         cell.page = page
@@ -113,8 +97,73 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 
 extension HomeViewController {
+    //MARK: Scroll Methods
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let pageNumber = Int(targetContentOffset.pointee.x / view.frame.width)
         pageControl.currentPage = pageNumber
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.pageControl.alpha = pageNumber == pages.count ? 0 : 1
+            self.skipButton.alpha = pageNumber == pages.count ? 0 : 1
+            self.nextButton.alpha = pageNumber == pages.count ? 0 : 1
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        view.endEditing(true)
+    }
+}
+
+extension HomeViewController {
+    //MARK: Helper Methods
+    func setupScrolling() {
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+            collectionView.isPagingEnabled = true
+        }
+    }
+    
+    func setupViews() {
+        observeKeyboardNotifications()
+        view.addSubview(collectionView)
+        view.addSubview(skipButton)
+        view.addSubview(nextButton)
+        view.addSubview(pageControl)
+        
+        view.addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
+        
+        view.addConstraintsWithFormat(format: "V:[v0(100)]|", views: pageControl)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: pageControl)
+        
+        view.addConstraintsWithFormat(format: "V:|-16-[v0(100)]", views: skipButton)
+        view.addConstraintsWithFormat(format: "H:|-30-[v0]", views: skipButton)
+        
+        view.addConstraintsWithFormat(format: "V:|-16-[v0(100)]", views: nextButton)
+        view.addConstraintsWithFormat(format: "H:[v0]-30-|", views: nextButton)
+    }
+    
+    func registerCollectionViewCells() {
+        collectionView.register(PageCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(LoginCell.self, forCellWithReuseIdentifier: loginCellId)
+    }
+    
+    fileprivate func observeKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardShow() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.view.frame = CGRect(x: 0, y: -50, width: self.view.frame.width, height: self.view.frame.height)
+        }, completion: nil)
+    }
+    
+    @objc func keyboardHide() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+        }, completion: nil)
     }
 }

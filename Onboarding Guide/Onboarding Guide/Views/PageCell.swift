@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PageCell: UICollectionViewCell {
+class PageCell: BaseCell {
     
     var page: Page? {
         didSet {
@@ -32,11 +32,6 @@ class PageCell: UICollectionViewCell {
         }
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-    }
-    
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -52,7 +47,7 @@ class PageCell: UICollectionViewCell {
         return tv
     }()
     
-    func setupViews() {
+    override func setupViews() {
         addSubview(imageView)
         addSubview(textView)
         
@@ -63,9 +58,5 @@ class PageCell: UICollectionViewCell {
         addConstraintsWithFormat(format: "H:|-20-[v0]-20-|", views: textView)
         textView.heightAnchor.constraint(equalToConstant: 250).isActive = true
         textView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
