@@ -18,8 +18,8 @@ class LoginCell: BaseCell {
         return iv
     }()
     
-    let emailTextField: UITextField = {
-       let tf = UITextField()
+    let emailTextField: LeftPaddedTextField = {
+       let tf = LeftPaddedTextField()
         tf.placeholder = "Email"
         tf.layer.borderColor = UIColor.lightGray.cgColor
         tf.layer.borderWidth = 1
@@ -27,8 +27,8 @@ class LoginCell: BaseCell {
         return tf
     }()
     
-    let passwordTextField: UITextField = {
-        let tf = UITextField()
+    let passwordTextField: LeftPaddedTextField = {
+        let tf = LeftPaddedTextField()
         tf.placeholder = "Password"
         tf.layer.borderColor = UIColor.lightGray.cgColor
         tf.layer.borderWidth = 1
@@ -56,5 +56,16 @@ class LoginCell: BaseCell {
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: emailTextField)
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: passwordTextField)
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: loginButton)
+    }
+}
+
+
+class LeftPaddedTextField: UITextField {
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x: bounds.origin.x + 10, y: bounds.origin.y, width: bounds.width + 10, height: bounds.height)
+    }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x: bounds.origin.x + 10, y: bounds.origin.y, width: bounds.width + 10, height: bounds.height)
     }
 }
