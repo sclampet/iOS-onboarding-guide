@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.isPagingEnabled = true
         cv.delegate = self
         cv.dataSource = self
         cv.backgroundColor = .white
@@ -120,7 +121,6 @@ extension HomeViewController {
     func setupScrolling() {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
-            collectionView.isPagingEnabled = true
         }
     }
     

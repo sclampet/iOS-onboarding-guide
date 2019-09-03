@@ -15,7 +15,7 @@ class HomeViewControllerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        homeController = HomeViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        homeController = HomeViewController()
     }
 
     override func tearDown() {
@@ -25,7 +25,7 @@ class HomeViewControllerTests: XCTestCase {
     
     func testSetHorizontalScrollSetup() {
         homeController.setupScrolling()
-        if let layout = homeController.collectionViewLayout as? UICollectionViewFlowLayout {
+        if let layout = homeController.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             XCTAssertTrue(layout.scrollDirection == .horizontal)
         }
     }
