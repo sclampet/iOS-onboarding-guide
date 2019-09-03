@@ -8,13 +8,9 @@
 
 import UIKit
 
-class LoginViewCell: UICollectionViewCell {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .blue
-    }
+class LoginViewCell: BaseCell {
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override func setupViews() {
+        backgroundColor = .black
     }
 }
