@@ -43,4 +43,17 @@ class HomeViewControllerTests: XCTestCase {
     func testCollectionViewIsPagingEnabled() {
         XCTAssertTrue(homeController.collectionView.isPagingEnabled)
     }
+    
+    func testGoToNextPage() {
+        let currentPage = homeController.pageControl.currentPage
+        homeController.goToNextPage()
+        
+        XCTAssertTrue(homeController.pageControl.currentPage == currentPage + 1)
+    }
+    
+//    func testSkipToLogin() {
+//        homeController.skipToLogin()
+//        
+////        XCTAssertTrue(homeController.pageControl.currentPage == ho)
+//    }
 }

@@ -10,15 +10,16 @@ import UIKit
 
 private let cellId = "cellId"
 private let loginCellId = "loginCellId"
-private let pages: [Page] = {
-    return [
-        Page(imageName: "page1", title: "Choose your adventure", bodyText: "We're here to help you make the most of the adventures that matter to you."),
-        Page(imageName: "page2", title: "Document your experience", bodyText: "We'll help make sure you never forget this."),
-        Page(imageName: "page3", title: "Bask in the glow", bodyText: "Relax and reminisce about what a great decision you've made.")
-    ]
-}()
 
 class HomeViewController: UIViewController {
+    
+    let pages: [Page] = {
+        return [
+            Page(imageName: "page1", title: "Choose your adventure", bodyText: "We're here to help you make the most of the adventures that matter to you."),
+            Page(imageName: "page2", title: "Document your experience", bodyText: "We'll help make sure you never forget this."),
+            Page(imageName: "page3", title: "Bask in the glow", bodyText: "Relax and reminisce about what a great decision you've made.")
+        ]
+    }()
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -30,11 +31,11 @@ class HomeViewController: UIViewController {
         return cv
     }()
     
-    let pageControl: UIPageControl = {
+    lazy var pageControl: UIPageControl = {
         let pc = UIPageControl()
         pc.pageIndicatorTintColor = .lightGray
         pc.currentPageIndicatorTintColor = .cyan
-        pc.numberOfPages = pages.count + 1
+        pc.numberOfPages = self.pages.count + 1
         return pc
     }()
     
@@ -169,9 +170,9 @@ extension HomeViewController {
     //MARK: Fade Control Buttons Out
     fileprivate func fadeControlsAway() {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.pageControl.alpha = self.pageControl.currentPage == pages.count ? 0 : 1
-            self.skipButton.alpha =  self.pageControl.currentPage == pages.count ? 0 : 1
-            self.nextButton.alpha =  self.pageControl.currentPage == pages.count ? 0 : 1
+            self.pageControl.alpha = self.pageControl.currentPage == self.pages.count ? 0 : 1
+            self.skipButton.alpha =  self.pageControl.currentPage == self.pages.count ? 0 : 1
+            self.nextButton.alpha =  self.pageControl.currentPage == self.pages.count ? 0 : 1
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
