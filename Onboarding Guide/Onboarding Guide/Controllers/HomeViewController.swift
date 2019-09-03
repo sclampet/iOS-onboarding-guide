@@ -38,11 +38,12 @@ class HomeViewController: UIViewController {
         return pc
     }()
     
-    let skipButton: UIButton = {
+    lazy var skipButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Skip", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(skipToLogin), for: .touchUpInside)
         return button
     }()
     
@@ -154,10 +155,14 @@ extension HomeViewController {
             fadeControlsAway()
         }
         
-        
         let indexPath = IndexPath(item: pageControl.currentPage + 1, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         pageControl.currentPage += 1
+    }
+    
+    @objc func skipToLogin() {
+        pageControl.currentPage = pages.count - 1
+        goToNextPage()
     }
     
     fileprivate func fadeControlsAway() {
