@@ -51,9 +51,9 @@ class HomeViewControllerTests: XCTestCase {
         XCTAssertTrue(homeController.pageControl.currentPage == currentPage + 1)
     }
     
-//    func testSkipToLogin() {
-//        homeController.skipToLogin()
-//        
-////        XCTAssertTrue(homeController.pageControl.currentPage == ho)
-//    }
+    func testSkipToLogin() {
+        homeController.skipToLogin()
+        
+        XCTAssertTrue(homeController.pageControl.currentPage == homeController.pages.count)
+    }
 }
