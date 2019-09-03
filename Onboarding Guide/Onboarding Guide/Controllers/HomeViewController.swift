@@ -37,6 +37,8 @@ class HomeViewController: UIViewController {
         return pc
     }()
     
+    var pageControlBottomAnchor: NSLayoutConstraint?
+    
     let skipButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Skip", for: .normal)
@@ -101,6 +103,23 @@ extension HomeViewController {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let pageNumber = Int(targetContentOffset.pointee.x / view.frame.width)
         pageControl.currentPage = pageNumber
+        
+        if pageNumber == pages.count {
+            pageControl.removeFromSuperview()
+            view.addSubview(pageControl)
+            view.addConstraintsWithFormat(format: "V:[v0]|", views: pageControl)
+            view.addConstraintsWithFormat(format: "H:|[v0]|", views: pageControl)
+        } else {
+            pageControl.removeFromSuperview()
+            view.addSubview(pageControl)
+            view.addConstraintsWithFormat(format: "V:[v0(100)]|", views: pageControl)
+            view.addConstraintsWithFormat(format: "H:|[v0]|", views: pageControl)
+        }
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            self.pageControl.alpha = pageNumber == pages.count ? 0 : 1
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
 }
 
@@ -115,9 +134,9 @@ extension HomeViewController {
     
     func setupViews() {
         view.addSubview(collectionView)
-        view.addSubview(pageControl)
         view.addSubview(skipButton)
         view.addSubview(nextButton)
+        view.addSubview(pageControl)
         
         view.addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
