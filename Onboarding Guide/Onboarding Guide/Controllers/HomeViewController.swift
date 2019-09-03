@@ -102,7 +102,7 @@ extension HomeViewController {
         let pageNumber = Int(targetContentOffset.pointee.x / view.frame.width)
         pageControl.currentPage = pageNumber
         
-        UIView.animate(withDuration: 0.35, delay: 0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.pageControl.alpha = pageNumber == pages.count ? 0 : 1
             self.skipButton.alpha = pageNumber == pages.count ? 0 : 1
             self.nextButton.alpha = pageNumber == pages.count ? 0 : 1
