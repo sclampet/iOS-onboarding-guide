@@ -46,11 +46,12 @@ class HomeViewController: UIViewController {
         return button
     }()
     
-    let nextButton: UIButton = {
+    lazy var nextButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Next", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(goToNextPage), for: .touchUpInside)
         return button
     }()
     
@@ -103,12 +104,7 @@ extension HomeViewController {
         let pageNumber = Int(targetContentOffset.pointee.x / view.frame.width)
         pageControl.currentPage = pageNumber
         
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.pageControl.alpha = pageNumber == pages.count ? 0 : 1
-            self.skipButton.alpha = pageNumber == pages.count ? 0 : 1
-            self.nextButton.alpha = pageNumber == pages.count ? 0 : 1
-            self.view.layoutIfNeeded()
-        }, completion: nil)
+        fadeControlsAway()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -147,6 +143,30 @@ extension HomeViewController {
     func registerCollectionViewCells() {
         collectionView.register(PageCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.register(LoginCell.self, forCellWithReuseIdentifier: loginCellId)
+    }
+    
+    @objc func goToNextPage() {
+        if pageControl.currentPage == pages.count {
+            return
+        }
+        
+        if pageControl.currentPage == pages.count - 1 {
+            fadeControlsAway()
+        }
+        
+        
+        let indexPath = IndexPath(item: pageControl.currentPage + 1, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        pageControl.currentPage += 1
+    }
+    
+    fileprivate func fadeControlsAway() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.pageControl.alpha = self.pageControl.currentPage == pages.count ? 0 : 1
+            self.skipButton.alpha =  self.pageControl.currentPage == pages.count ? 0 : 1
+            self.nextButton.alpha =  self.pageControl.currentPage == pages.count ? 0 : 1
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
     
     fileprivate func observeKeyboardNotifications() {
