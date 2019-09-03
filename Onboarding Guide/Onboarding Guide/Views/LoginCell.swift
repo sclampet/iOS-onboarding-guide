@@ -57,6 +57,7 @@ class LoginCell: BaseCell {
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: passwordTextField)
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: loginButton)
     }
+    
 }
 
 
