@@ -146,6 +146,7 @@ extension HomeViewController {
         collectionView.register(LoginCell.self, forCellWithReuseIdentifier: loginCellId)
     }
     
+    //MARK: Skip and Next Button Methods
     @objc func goToNextPage() {
         if pageControl.currentPage == pages.count {
             return
@@ -165,6 +166,7 @@ extension HomeViewController {
         goToNextPage()
     }
     
+    //MARK: Fade Control Buttons Out
     fileprivate func fadeControlsAway() {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.pageControl.alpha = self.pageControl.currentPage == pages.count ? 0 : 1
@@ -174,6 +176,7 @@ extension HomeViewController {
         }, completion: nil)
     }
     
+    //MARK: Keyboard Observers
     fileprivate func observeKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         
