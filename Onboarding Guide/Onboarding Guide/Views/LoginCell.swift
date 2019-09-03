@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewCell: BaseCell {
+class LoginCell: BaseCell {
     
     override func setupViews() {
         backgroundColor = .black
