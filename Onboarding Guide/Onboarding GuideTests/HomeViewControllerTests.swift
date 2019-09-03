@@ -15,7 +15,7 @@ class HomeViewControllerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        homeController = HomeViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        homeController = HomeViewController()
     }
 
     override func tearDown() {
@@ -25,7 +25,7 @@ class HomeViewControllerTests: XCTestCase {
     
     func testSetHorizontalScrollSetup() {
         homeController.setupScrolling()
-        if let layout = homeController.collectionViewLayout as? UICollectionViewFlowLayout {
+        if let layout = homeController.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             XCTAssertTrue(layout.scrollDirection == .horizontal)
         }
     }
@@ -42,5 +42,18 @@ class HomeViewControllerTests: XCTestCase {
     
     func testCollectionViewIsPagingEnabled() {
         XCTAssertTrue(homeController.collectionView.isPagingEnabled)
+    }
+    
+    func testGoToNextPage() {
+        let currentPage = homeController.pageControl.currentPage
+        homeController.goToNextPage()
+        
+        XCTAssertTrue(homeController.pageControl.currentPage == currentPage + 1)
+    }
+    
+    func testSkipToLogin() {
+        homeController.skipToLogin()
+        
+        XCTAssertTrue(homeController.pageControl.currentPage == homeController.pages.count)
     }
 }

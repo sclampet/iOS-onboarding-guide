@@ -10,46 +10,50 @@ import UIKit
 
 private let cellId = "cellId"
 private let loginCellId = "loginCellId"
-private let pages: [Page] = {
-    return [
-        Page(imageName: "page1", title: "Choose your adventure", bodyText: "We're here to help you make the most of the adventures that matter to you."),
-        Page(imageName: "page2", title: "Document your experience", bodyText: "We'll help make sure you never forget this."),
-        Page(imageName: "page3", title: "Bask in the glow", bodyText: "Relax and reminisce about what a great decision you've made.")
-    ]
-}()
 
 class HomeViewController: UIViewController {
+    
+    let pages: [Page] = {
+        return [
+            Page(imageName: "page1", title: "Choose your adventure", bodyText: "We're here to help you make the most of the adventures that matter to you."),
+            Page(imageName: "page2", title: "Document your experience", bodyText: "We'll help make sure you never forget this."),
+            Page(imageName: "page3", title: "Bask in the glow", bodyText: "Relax and reminisce about what a great decision you've made.")
+        ]
+    }()
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.isPagingEnabled = true
         cv.delegate = self
         cv.dataSource = self
         cv.backgroundColor = .white
         return cv
     }()
     
-    let pageControl: UIPageControl = {
+    lazy var pageControl: UIPageControl = {
         let pc = UIPageControl()
         pc.pageIndicatorTintColor = .lightGray
         pc.currentPageIndicatorTintColor = .cyan
-        pc.numberOfPages = pages.count + 1
+        pc.numberOfPages = self.pages.count + 1
         return pc
     }()
     
-    let skipButton: UIButton = {
+    lazy var skipButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Skip", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(skipToLogin), for: .touchUpInside)
         return button
     }()
     
-    let nextButton: UIButton = {
+    lazy var nextButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Next", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(goToNextPage), for: .touchUpInside)
         return button
     }()
     
@@ -102,12 +106,7 @@ extension HomeViewController {
         let pageNumber = Int(targetContentOffset.pointee.x / view.frame.width)
         pageControl.currentPage = pageNumber
         
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.pageControl.alpha = pageNumber == pages.count ? 0 : 1
-            self.skipButton.alpha = pageNumber == pages.count ? 0 : 1
-            self.nextButton.alpha = pageNumber == pages.count ? 0 : 1
-            self.view.layoutIfNeeded()
-        }, completion: nil)
+        fadeControlsAway()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -120,7 +119,6 @@ extension HomeViewController {
     func setupScrolling() {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
-            collectionView.isPagingEnabled = true
         }
     }
     
@@ -149,6 +147,37 @@ extension HomeViewController {
         collectionView.register(LoginCell.self, forCellWithReuseIdentifier: loginCellId)
     }
     
+    //MARK: Skip and Next Button Methods
+    @objc func goToNextPage() {
+        if pageControl.currentPage == pages.count {
+            return
+        }
+        
+        if pageControl.currentPage == pages.count - 1 {
+            fadeControlsAway()
+        }
+        
+        let indexPath = IndexPath(item: pageControl.currentPage + 1, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        pageControl.currentPage += 1
+    }
+    
+    @objc func skipToLogin() {
+        pageControl.currentPage = pages.count - 1
+        goToNextPage()
+    }
+    
+    //MARK: Fade Control Buttons Out
+    fileprivate func fadeControlsAway() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.pageControl.alpha = self.pageControl.currentPage == self.pages.count ? 0 : 1
+            self.skipButton.alpha =  self.pageControl.currentPage == self.pages.count ? 0 : 1
+            self.nextButton.alpha =  self.pageControl.currentPage == self.pages.count ? 0 : 1
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    //MARK: Keyboard Observers
     fileprivate func observeKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         
