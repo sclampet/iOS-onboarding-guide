@@ -49,6 +49,7 @@ class LoginCell: BaseCell {
         addSubview(emailTextField)
         addSubview(passwordTextField)
         addSubview(loginButton)
+        setupGradientLayer()
         
         addConstraintsWithFormat(format: "V:|-190-[v0(50)]-22-[v1(50)]-22-[v2(50)]", views: emailTextField, passwordTextField, loginButton)
         
@@ -58,6 +59,15 @@ class LoginCell: BaseCell {
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: emailTextField)
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: passwordTextField)
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: loginButton)
+    }
+    
+    private func setupGradientLayer() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bounds
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradientLayer.locations = [0.05, 1]
+        
+        wave.layer.addSublayer(gradientLayer)
     }
     
 }
