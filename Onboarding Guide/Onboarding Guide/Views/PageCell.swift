@@ -44,11 +44,13 @@ class PageCell: BaseCell {
         tv.text = ""
         tv.isEditable = false
         tv.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
+        tv.backgroundColor = UIColor.init(red: 255, green: 255, blue: 255, alpha: 0.3)
         return tv
     }()
     
     override func setupViews() {
         addSubview(imageView)
+        setupGradientLayer()
         addSubview(textView)
         
         addConstraintsWithFormat(format: "V:|[v0]|", views: imageView)
@@ -57,5 +59,14 @@ class PageCell: BaseCell {
         addConstraintsWithFormat(format: "H:|-20-[v0]-20-|", views: textView)
         textView.heightAnchor.constraint(equalToConstant: 250).isActive = true
         textView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    }
+    
+    private func setupGradientLayer() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bounds
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradientLayer.locations = [0.1, 1]
+        
+        imageView.layer.addSublayer(gradientLayer)
     }
 }
