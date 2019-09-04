@@ -17,7 +17,7 @@ class PageCell: BaseCell {
             }
             imageView.image = UIImage(named: page.imageName)
             
-            let color = UIColor(white: 0.2, alpha: 1)
+            let color = UIColor(white: 1, alpha: 1)
             let attributedText = NSMutableAttributedString(string: page.title, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .medium), NSAttributedString.Key.foregroundColor: color])
             
             attributedText.append(NSAttributedString(string: "\n\n\(page.bodyText)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: color]))
@@ -44,7 +44,7 @@ class PageCell: BaseCell {
         tv.text = ""
         tv.isEditable = false
         tv.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
-        tv.backgroundColor = UIColor.init(red: 255, green: 255, blue: 255, alpha: 0.3)
+        tv.backgroundColor = .clear
         return tv
     }()
     
@@ -57,7 +57,7 @@ class PageCell: BaseCell {
         addConstraintsWithFormat(format: "H:|[v0]|", views: imageView)
         
         addConstraintsWithFormat(format: "H:|-20-[v0]-20-|", views: textView)
-        textView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        textView.heightAnchor.constraint(equalToConstant: 325).isActive = true
         textView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
@@ -65,7 +65,7 @@ class PageCell: BaseCell {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = bounds
         gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-        gradientLayer.locations = [0.1, 1]
+        gradientLayer.locations = [0, 1.1]
         
         imageView.layer.addSublayer(gradientLayer)
     }
