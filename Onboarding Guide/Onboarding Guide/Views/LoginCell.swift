@@ -10,9 +10,9 @@ import UIKit
 
 class LoginCell: BaseCell {
     
-    let logo: UIImageView = {
+    let wave: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "logo")
+        iv.image = UIImage(named: "login")
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         return iv
@@ -45,14 +45,16 @@ class LoginCell: BaseCell {
     }()
     
     override func setupViews() {
-        addSubview(logo)
+        addSubview(wave)
         addSubview(emailTextField)
         addSubview(passwordTextField)
         addSubview(loginButton)
         
-        addConstraintsWithFormat(format: "V:|-150-[v0]-40-[v1(50)]-22-[v2(50)]-22-[v3(50)]", views: logo, emailTextField, passwordTextField, loginButton)
+        addConstraintsWithFormat(format: "V:|-190-[v0(50)]-22-[v1(50)]-22-[v2(50)]", views: emailTextField, passwordTextField, loginButton)
         
-        addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: logo)
+        addConstraintsWithFormat(format: "V:|[v0]|", views: wave)
+        addConstraintsWithFormat(format: "H:|[v0]|", views: wave)
+        
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: emailTextField)
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: passwordTextField)
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: loginButton)
