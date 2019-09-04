@@ -33,8 +33,8 @@ class HomeViewController: UIViewController {
     
     lazy var pageControl: UIPageControl = {
         let pc = UIPageControl()
-        pc.pageIndicatorTintColor = .lightGray
-        pc.currentPageIndicatorTintColor = .cyan
+        pc.pageIndicatorTintColor = .gray
+        pc.currentPageIndicatorTintColor = .white
         pc.numberOfPages = self.pages.count + 1
         return pc
     }()
