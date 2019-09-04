@@ -51,7 +51,7 @@ class LoginCell: BaseCell {
         addSubview(loginButton)
         setupGradientLayer()
         
-        addConstraintsWithFormat(format: "V:|-190-[v0(50)]-22-[v1(50)]-22-[v2(50)]", views: emailTextField, passwordTextField, loginButton)
+        addConstraintsWithFormat(format: "V:[v0(50)]-22-[v1(50)]-22-[v2(50)]-190-|", views: emailTextField, passwordTextField, loginButton)
         
         addConstraintsWithFormat(format: "V:|[v0]|", views: wave)
         addConstraintsWithFormat(format: "H:|[v0]|", views: wave)
