@@ -51,9 +51,8 @@ class PageCell: BaseCell {
         addSubview(imageView)
         addSubview(textView)
         
+        addConstraintsWithFormat(format: "V:|[v0]|", views: imageView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: imageView)
-        imageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: textView.topAnchor).isActive = true
         
         addConstraintsWithFormat(format: "H:|-20-[v0]-20-|", views: textView)
         textView.heightAnchor.constraint(equalToConstant: 250).isActive = true
