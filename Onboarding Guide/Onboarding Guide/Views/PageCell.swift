@@ -65,7 +65,7 @@ class PageCell: BaseCell {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = bounds
         gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-        gradientLayer.locations = [0.1, 1]
+        gradientLayer.locations = [0.2, 1]
         
         imageView.layer.addSublayer(gradientLayer)
     }
