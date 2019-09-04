@@ -20,10 +20,10 @@ class LoginCell: BaseCell {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "welcome"
+        label.text = "Let's\ndo this!"
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 60)
-        label.textAlignment = .center
+        label.numberOfLines = 2
         return label
     }()
     
@@ -68,7 +68,7 @@ class LoginCell: BaseCell {
         addConstraintsWithFormat(format: "H:|[v0]|", views: wave)
         
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: titleLabel)
-        titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -150).isActive = true
+        titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -100).isActive = true
         
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: emailTextField)
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: passwordTextField)
