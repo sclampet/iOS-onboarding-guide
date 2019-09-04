@@ -20,7 +20,7 @@ class LoginCell: BaseCell {
     
     let emailTextField: LeftPaddedTextField = {
        let tf = LeftPaddedTextField()
-        tf.placeholder = "Email"
+        tf.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor(white: 1, alpha: 1)])
         tf.layer.borderColor = UIColor.lightGray.cgColor
         tf.layer.borderWidth = 1
         tf.keyboardType = .emailAddress
@@ -29,7 +29,7 @@ class LoginCell: BaseCell {
     
     let passwordTextField: LeftPaddedTextField = {
         let tf = LeftPaddedTextField()
-        tf.placeholder = "Password"
+        tf.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor(white: 1, alpha: 1)])
         tf.layer.borderColor = UIColor.lightGray.cgColor
         tf.layer.borderWidth = 1
         tf.keyboardType = .emailAddress
@@ -38,9 +38,10 @@ class LoginCell: BaseCell {
     
     let loginButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = .black
+        button.backgroundColor = .white
         button.setTitle("Log in", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.layer.cornerRadius = 25
         return button
     }()
     
@@ -51,7 +52,7 @@ class LoginCell: BaseCell {
         addSubview(loginButton)
         setupGradientLayer()
         
-        addConstraintsWithFormat(format: "V:[v0(50)]-22-[v1(50)]-22-[v2(50)]-190-|", views: emailTextField, passwordTextField, loginButton)
+        addConstraintsWithFormat(format: "V:[v0(50)]-22-[v1(50)]-26-[v2(50)]-175-|", views: emailTextField, passwordTextField, loginButton)
         
         addConstraintsWithFormat(format: "V:|[v0]|", views: wave)
         addConstraintsWithFormat(format: "H:|[v0]|", views: wave)
@@ -75,10 +76,10 @@ class LoginCell: BaseCell {
 
 class LeftPaddedTextField: UITextField {
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x: bounds.origin.x + 10, y: bounds.origin.y, width: bounds.width + 10, height: bounds.height)
+        return CGRect(x: bounds.origin.x + 20, y: bounds.origin.y, width: bounds.width + 10, height: bounds.height)
     }
     
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x: bounds.origin.x + 10, y: bounds.origin.y, width: bounds.width + 10, height: bounds.height)
+        return CGRect(x: bounds.origin.x + 20, y: bounds.origin.y, width: bounds.width + 10, height: bounds.height)
     }
 }
