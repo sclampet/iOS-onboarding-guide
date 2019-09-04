@@ -18,6 +18,15 @@ class LoginCell: BaseCell {
         return iv
     }()
     
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "welcome"
+        label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 60)
+        label.textAlignment = .center
+        return label
+    }()
+    
     let emailTextField: LeftPaddedTextField = {
        let tf = LeftPaddedTextField()
         tf.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor(white: 1, alpha: 1)])
@@ -47,15 +56,19 @@ class LoginCell: BaseCell {
     
     override func setupViews() {
         addSubview(wave)
+        addSubview(titleLabel)
         addSubview(emailTextField)
         addSubview(passwordTextField)
         addSubview(loginButton)
         setupGradientLayer()
         
-        addConstraintsWithFormat(format: "V:[v0(50)]-22-[v1(50)]-26-[v2(50)]-175-|", views: emailTextField, passwordTextField, loginButton)
+        addConstraintsWithFormat(format: "V:[v0(50)]-22-[v1(50)]-26-[v2(50)]-200-|", views: emailTextField, passwordTextField, loginButton)
         
         addConstraintsWithFormat(format: "V:|[v0]|", views: wave)
         addConstraintsWithFormat(format: "H:|[v0]|", views: wave)
+        
+        addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: titleLabel)
+        titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -150).isActive = true
         
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: emailTextField)
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: passwordTextField)
