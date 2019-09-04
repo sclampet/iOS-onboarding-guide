@@ -53,7 +53,7 @@ class PageCell: BaseCell {
         setupGradientLayer()
         addSubview(textView)
         
-        addConstraintsWithFormat(format: "V:|[v0]|", views: imageView)
+        addConstraintsWithFormat(format: "V:|[v0]-20-|", views: imageView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: imageView)
         
         addConstraintsWithFormat(format: "H:|-20-[v0]-20-|", views: textView)
