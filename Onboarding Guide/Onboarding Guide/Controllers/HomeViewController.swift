@@ -17,7 +17,7 @@ class HomeViewController: UIViewController {
         return [
             Page(imageName: "page1", title: "Choose your adventure", bodyText: "We're here to help you make the most of the adventures that matter to you."),
             Page(imageName: "page2", title: "Document your experience", bodyText: "We'll help make sure you never forget this."),
-            Page(imageName: "page3", title: "Bask in the glow", bodyText: "Relax and reminisce about what a great decision you've made.")
+            Page(imageName: "page3", title: "Explore new opportunities", bodyText: "Relax and reminisce about what a great decision you've made.")
         ]
     }()
     
