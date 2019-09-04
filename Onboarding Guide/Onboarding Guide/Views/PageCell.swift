@@ -17,10 +17,10 @@ class PageCell: BaseCell {
             }
             imageView.image = UIImage(named: page.imageName)
             
-            let color = UIColor(white: 0.2, alpha: 1)
-            let attributedText = NSMutableAttributedString(string: page.title, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .medium), NSAttributedString.Key.foregroundColor: color])
+            let color = UIColor(white: 1, alpha: 1)
+            let attributedText = NSMutableAttributedString(string: page.title, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24, weight: .medium), NSAttributedString.Key.foregroundColor: color])
             
-            attributedText.append(NSAttributedString(string: "\n\n\(page.bodyText)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: color]))
+            attributedText.append(NSAttributedString(string: "\n\n\(page.bodyText)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: color]))
             
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.alignment = .center
@@ -44,19 +44,29 @@ class PageCell: BaseCell {
         tv.text = ""
         tv.isEditable = false
         tv.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
+        tv.backgroundColor = .clear
         return tv
     }()
     
     override func setupViews() {
         addSubview(imageView)
+        setupGradientLayer()
         addSubview(textView)
         
+        addConstraintsWithFormat(format: "V:|[v0]-20-|", views: imageView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: imageView)
-        imageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: textView.topAnchor).isActive = true
         
         addConstraintsWithFormat(format: "H:|-20-[v0]-20-|", views: textView)
-        textView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        textView.heightAnchor.constraint(equalToConstant: 275).isActive = true
         textView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    }
+    
+    private func setupGradientLayer() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bounds
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradientLayer.locations = [0.2, 1]
+        
+        imageView.layer.addSublayer(gradientLayer)
     }
 }

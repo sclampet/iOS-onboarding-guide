@@ -10,17 +10,26 @@ import UIKit
 
 class LoginCell: BaseCell {
     
-    let logo: UIImageView = {
+    let wave: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "logo")
+        iv.image = UIImage(named: "login")
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         return iv
     }()
     
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Let's\ndo this!"
+        label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 60)
+        label.numberOfLines = 2
+        return label
+    }()
+    
     let emailTextField: LeftPaddedTextField = {
        let tf = LeftPaddedTextField()
-        tf.placeholder = "Email"
+        tf.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor(white: 1, alpha: 1)])
         tf.layer.borderColor = UIColor.lightGray.cgColor
         tf.layer.borderWidth = 1
         tf.keyboardType = .emailAddress
@@ -29,7 +38,7 @@ class LoginCell: BaseCell {
     
     let passwordTextField: LeftPaddedTextField = {
         let tf = LeftPaddedTextField()
-        tf.placeholder = "Password"
+        tf.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor(white: 1, alpha: 1)])
         tf.layer.borderColor = UIColor.lightGray.cgColor
         tf.layer.borderWidth = 1
         tf.keyboardType = .emailAddress
@@ -38,24 +47,41 @@ class LoginCell: BaseCell {
     
     let loginButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = .black
+        button.backgroundColor = .white
         button.setTitle("Log in", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.layer.cornerRadius = 25
         return button
     }()
     
     override func setupViews() {
-        addSubview(logo)
+        addSubview(wave)
+        addSubview(titleLabel)
         addSubview(emailTextField)
         addSubview(passwordTextField)
         addSubview(loginButton)
+        setupGradientLayer()
         
-        addConstraintsWithFormat(format: "V:|-150-[v0]-40-[v1(50)]-22-[v2(50)]-22-[v3(50)]", views: logo, emailTextField, passwordTextField, loginButton)
+        addConstraintsWithFormat(format: "V:[v0(50)]-22-[v1(50)]-26-[v2(50)]-200-|", views: emailTextField, passwordTextField, loginButton)
         
-        addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: logo)
+        addConstraintsWithFormat(format: "V:|[v0]|", views: wave)
+        addConstraintsWithFormat(format: "H:|[v0]|", views: wave)
+        
+        addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: titleLabel)
+        titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -100).isActive = true
+        
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: emailTextField)
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: passwordTextField)
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: loginButton)
+    }
+    
+    private func setupGradientLayer() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bounds
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradientLayer.locations = [0.05, 1]
+        
+        wave.layer.addSublayer(gradientLayer)
     }
     
 }
@@ -63,10 +89,10 @@ class LoginCell: BaseCell {
 
 class LeftPaddedTextField: UITextField {
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x: bounds.origin.x + 10, y: bounds.origin.y, width: bounds.width + 10, height: bounds.height)
+        return CGRect(x: bounds.origin.x + 20, y: bounds.origin.y, width: bounds.width + 10, height: bounds.height)
     }
     
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x: bounds.origin.x + 10, y: bounds.origin.y, width: bounds.width + 10, height: bounds.height)
+        return CGRect(x: bounds.origin.x + 20, y: bounds.origin.y, width: bounds.width + 10, height: bounds.height)
     }
 }

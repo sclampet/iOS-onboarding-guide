@@ -17,7 +17,7 @@ class HomeViewController: UIViewController {
         return [
             Page(imageName: "page1", title: "Choose your adventure", bodyText: "We're here to help you make the most of the adventures that matter to you."),
             Page(imageName: "page2", title: "Document your experience", bodyText: "We'll help make sure you never forget this."),
-            Page(imageName: "page3", title: "Bask in the glow", bodyText: "Relax and reminisce about what a great decision you've made.")
+            Page(imageName: "page3", title: "Explore new opportunities", bodyText: "Relax and reminisce about what a great decision you've made.")
         ]
     }()
     
@@ -27,14 +27,14 @@ class HomeViewController: UIViewController {
         cv.isPagingEnabled = true
         cv.delegate = self
         cv.dataSource = self
-        cv.backgroundColor = .white
+        cv.backgroundColor = .black
         return cv
     }()
     
     lazy var pageControl: UIPageControl = {
         let pc = UIPageControl()
-        pc.pageIndicatorTintColor = .lightGray
-        pc.currentPageIndicatorTintColor = .cyan
+        pc.pageIndicatorTintColor = .gray
+        pc.currentPageIndicatorTintColor = .white
         pc.numberOfPages = self.pages.count + 1
         return pc
     }()
@@ -186,7 +186,7 @@ extension HomeViewController {
     
     @objc func keyboardShow() {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.view.frame = CGRect(x: 0, y: -50, width: self.view.frame.width, height: self.view.frame.height)
+            self.view.frame = CGRect(x: 0, y: -150, width: self.view.frame.width, height: self.view.frame.height)
         }, completion: nil)
     }
     
