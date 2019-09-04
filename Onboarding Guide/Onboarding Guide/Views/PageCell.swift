@@ -57,7 +57,7 @@ class PageCell: BaseCell {
         addConstraintsWithFormat(format: "H:|[v0]|", views: imageView)
         
         addConstraintsWithFormat(format: "H:|-20-[v0]-20-|", views: textView)
-        textView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        textView.heightAnchor.constraint(equalToConstant: 275).isActive = true
         textView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
@@ -65,7 +65,7 @@ class PageCell: BaseCell {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = bounds
         gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-        gradientLayer.locations = [0.075, 1]
+        gradientLayer.locations = [0.1, 1]
         
         imageView.layer.addSublayer(gradientLayer)
     }
