@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
         cv.isPagingEnabled = true
         cv.delegate = self
         cv.dataSource = self
-        cv.backgroundColor = .white
+        cv.backgroundColor = .black
         return cv
     }()
     
