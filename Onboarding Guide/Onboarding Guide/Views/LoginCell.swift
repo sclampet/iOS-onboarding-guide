@@ -24,6 +24,7 @@ class LoginCell: BaseCell {
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 60)
         label.numberOfLines = 2
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
     
@@ -62,13 +63,12 @@ class LoginCell: BaseCell {
         addSubview(loginButton)
         setupGradientLayer()
         
-        addConstraintsWithFormat(format: "V:[v0(50)]-22-[v1(50)]-26-[v2(50)]-200-|", views: emailTextField, passwordTextField, loginButton)
+        addConstraintsWithFormat(format: "V:[v0]-50-[v1(50)]-22-[v2(50)]-26-[v3(50)]-125-|", views:titleLabel, emailTextField, passwordTextField, loginButton)
         
         addConstraintsWithFormat(format: "V:|[v0]|", views: wave)
         addConstraintsWithFormat(format: "H:|[v0]|", views: wave)
         
-        addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: titleLabel)
-        titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -100).isActive = true
+        addConstraintsWithFormat(format: "H:|-32-[v0]", views: titleLabel)
         
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: emailTextField)
         addConstraintsWithFormat(format: "H:|-32-[v0]-32-|", views: passwordTextField)
