@@ -4,4 +4,5 @@
 
 ## App Demo
 
-<img src="images/demo.gif">
+<img src="images/page1.png" width="285"><img src="images/page2.png" width="285"><img src="images/page3.png" width="285"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/demo.gif">
