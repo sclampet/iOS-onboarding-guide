@@ -67,6 +67,10 @@ class HomeViewController: UIViewController {
         setupScrolling()
         setupViews()
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
